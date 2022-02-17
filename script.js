@@ -60,6 +60,20 @@ function addLetter(letter) {
     if (userGuess.length < 3) {
         userGuess.push(letter);
         console.log(userGuess);
+        // Modify DOM:
+        if (turn === 1) {
+            top1.textContent = userGuess[0];
+            top2.textContent = userGuess[1];
+            top3.textContent = userGuess[2];
+        } else if (turn === 2) {
+            mid1.textContent = userGuess[0];
+            mid2.textContent = userGuess[1];
+            mid3.textContent = userGuess[2];
+        } else if (turn === 3) {
+            bot1.textContent = userGuess[0];
+            bot2.textContent = userGuess[1];
+            bot3.textContent = userGuess[2];
+        }
     } else {
         return;
     }
@@ -69,6 +83,20 @@ function deleteLetter() {
     if (userGuess.length > 0) {
         userGuess.pop();
         console.log(userGuess);
+        // Modify DOM:
+        if (turn === 1) {
+            top1.textContent = userGuess[0];
+            top2.textContent = userGuess[1];
+            top3.textContent = userGuess[2];
+        } else if (turn === 2) {
+            mid1.textContent = userGuess[0];
+            mid2.textContent = userGuess[1];
+            mid3.textContent = userGuess[2];
+        } else if (turn === 3) {
+            bot1.textContent = userGuess[0];
+            bot2.textContent = userGuess[1];
+            bot3.textContent = userGuess[2];
+        }
     } else {
         return;
     }
@@ -78,6 +106,7 @@ function submitGuess() {
     if (userGuess.length === 3) {
         console.log(userGuess.join(''));
         userGuess = [];
+        turn++;
     } else {
         return;
     }
