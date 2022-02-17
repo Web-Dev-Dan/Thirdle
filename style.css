@@ -1,5 +1,7 @@
 :root {
     --color-correct: rgb(61, 61, 179);
+    --color-wrong-location: rgb(223, 153, 23);
+    --color-wrong: rgb(41, 41, 41);
 }
 
 * {
@@ -63,6 +65,25 @@ html, body {
     align-items: center;
     font-size: 5rem;
     font-weight: 900;
+    text-transform: uppercase;
+}
+
+.correct {
+    background-color: var(--color-correct);
+    color: white;
+    border: none;
+}
+
+.wrong-location {
+    background-color: var(--color-wrong-location);
+    color: white;
+    border: none;
+}
+
+.wrong {
+    background-color: var(--color-wrong);
+    color: white;
+    border: none;
 }
 
 /* Keyboard */
