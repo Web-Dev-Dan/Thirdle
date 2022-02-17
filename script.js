@@ -105,9 +105,90 @@ function deleteLetter() {
 function submitGuess() {
     if (userGuess.length === 3) {
         console.log(userGuess.join(''));
+        // Modify DOM --
+        checkGuess();
+        // -------------
         userGuess = [];
         turn++;
     } else {
         return;
+    }
+}
+
+function checkGuess() {
+    console.log(userGuess);
+    console.log(randomWordArray);
+    if (turn === 1) {
+        if (userGuess[0] === randomWordArray[0]) {
+            top1.classList.add('correct');
+        } else if (userGuess[0] !== randomWordArray[0] && randomWordArray.includes(userGuess[0])) {
+            top1.classList.add('wrong-location');
+        } else if (userGuess[0] !== randomWordArray[0]) {
+            top1.classList.add('wrong');
+        }
+
+        if (userGuess[1] === randomWordArray[1]) {
+            top2.classList.add('correct');
+        } else if (userGuess[1] !== randomWordArray[1] && randomWordArray.includes(userGuess[1])) {
+            top2.classList.add('wrong-location');
+        } else if (userGuess[1] !== randomWordArray[1]) {
+            top2.classList.add('wrong');
+        }
+
+        if (userGuess[2] === randomWordArray[2]) {
+            top3.classList.add('correct');
+        } else if (userGuess[2] !== randomWordArray[2] && randomWordArray.includes(userGuess[2])) {
+            top3.classList.add('wrong-location');
+        } else if (userGuess[2] !== randomWordArray[2]) {
+            top3.classList.add('wrong');
+        }
+    } else if (turn === 2) {
+        if (userGuess[0] === randomWordArray[0]) {
+            mid1.classList.add('correct');
+        } else if (userGuess[0] !== randomWordArray[0] && randomWordArray.includes(userGuess[0])) {
+            mid1.classList.add('wrong-location');
+        } else if (userGuess[0] !== randomWordArray[0]) {
+            mid1.classList.add('wrong');
+        }
+
+        if (userGuess[1] === randomWordArray[1]) {
+            mid2.classList.add('correct');
+        } else if (userGuess[1] !== randomWordArray[1] && randomWordArray.includes(userGuess[1])) {
+            mid2.classList.add('wrong-location');
+        } else if (userGuess[1] !== randomWordArray[1]) {
+            mid2.classList.add('wrong');
+        }
+
+        if (userGuess[2] === randomWordArray[2]) {
+            mid3.classList.add('correct');
+        } else if (userGuess[2] !== randomWordArray[2] && randomWordArray.includes(userGuess[2])) {
+            mid3.classList.add('wrong-location');
+        } else if (userGuess[2] !== randomWordArray[2]) {
+            mid3.classList.add('wrong');
+        }
+    } else if (turn === 3) {
+        if (userGuess[0] === randomWordArray[0]) {
+            bot1.classList.add('correct');
+        } else if (userGuess[0] !== randomWordArray[0] && randomWordArray.includes(userGuess[0])) {
+            bot1.classList.add('wrong-location');
+        } else if (userGuess[0] !== randomWordArray[0]) {
+            bot1.classList.add('wrong');
+        }
+
+        if (userGuess[1] === randomWordArray[1]) {
+            bot2.classList.add('correct');
+        } else if (userGuess[1] !== randomWordArray[1] && randomWordArray.includes(userGuess[1])) {
+            bot2.classList.add('wrong-location');
+        } else if (userGuess[1] !== randomWordArray[1]) {
+            bot2.classList.add('wrong');
+        }
+
+        if (userGuess[2] === randomWordArray[2]) {
+            bot3.classList.add('correct');
+        } else if (userGuess[2] !== randomWordArray[2] && randomWordArray.includes(userGuess[2])) {
+            bot3.classList.add('wrong-location');
+        } else if (userGuess[2] !== randomWordArray[2]) {
+            bot3.classList.add('wrong');
+        }
     }
 }
