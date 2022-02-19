@@ -118,6 +118,10 @@ function submitGuess() {
 function checkGuess() {
     console.log(userGuess);
     console.log(randomWordArray);
+    if (userGuess.join('') === randomWord) {
+        gameWon();
+    }
+
     if (turn === 1) {
         if (userGuess[0] === randomWordArray[0]) {
             top1.classList.add('correct');
@@ -191,4 +195,8 @@ function checkGuess() {
             bot3.classList.add('wrong');
         }
     }
+}
+
+function gameWon() {
+    console.log(`That's right! The correct word was '${randomWord}'.`)
 }
