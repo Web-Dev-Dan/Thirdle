@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="thirdle-fav.png">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Styling -->
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
@@ -13,6 +17,54 @@
 </head>
 
 <body>
+    <!-- Modal -->
+    <div class="background"></div>
+    <div class="modal-container">
+        <div class="modal">
+            <div class="modal-content">
+                <div class="modal-icons">
+                    <p class="modal-img modal-img__left">🎉</p>
+                </div>
+                <h3 class="modal-header">Congratulations!</h3>
+                <div class="modal-message">
+                    <p class="msg-primary">You won! The correct word was <span id="correctAnswer"
+                            class="emphasis">dog</span>.
+                    </p>
+                    <p class="msg-secondary">You guessed correct on your <span id="turnNumber">second</span> turn. You
+                        <span id="usedHint">used/didn't use</span> your hint and received <span
+                            id="gamePoints">100</span>
+                        points.</p>
+                </div>
+                <div class="modal-buttons">
+                    <button id="playAgainBtn" class="btn btn-primary"><i class="fa-solid fa-arrow-rotate-right"></i>
+                        Play Again</button>
+                    <button class="btn btn-secondary"><i class="fa-solid fa-chart-line"></i> View Stats</button>
+                </div>
+            </div>
+
+
+            <div class="lose-modal-content">
+                <div class="modal-icons">
+                    <p class="modal-img modal-img__left">😩</p>
+                </div>
+                <h3 class="modal-header">Game Over!</h3>
+                <div class="modal-message">
+                    <p class="msg-primary">You lost! The correct word was <span id="correctAnswer"
+                            class="emphasis">dog</span>.
+                    </p>
+                    <p class="msg-secondary">You <span id="usedHint">used/didn't use</span> your hint and received <span
+                            id="gamePoints">100</span> points.</p>
+                </div>
+                <div class="modal-buttons">
+                    <button id="playAgainBtn" class="btn btn-primary"><i class="fa-solid fa-arrow-rotate-right"></i>
+                        Play Again</button>
+                    <button class="btn btn-secondary"><i class="fa-solid fa-chart-line"></i> View Stats</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GAME -->
     <div class="header">
         <div class="header-letter">T</div>
         <div class="header-letter">H</div>
@@ -21,6 +73,13 @@
         <div class="header-letter">D</div>
         <div class="header-letter">L</div>
         <div class="header-letter">E</div>
+    </div>
+
+    <div class="stats-small">
+        <button class="stats-btn stats-btn__hint"><i class="fa-solid fa-magnifying-glass"></i>
+            Hint</button>
+        <button class="stats-btn stats-btn__stats"><i class="fa-solid fa-chart-line"></i> Stats</button>
+        <button class="stats-btn stats-btn__rules"><i class="fa-solid fa-circle-info"></i> Rules</button>
     </div>
 
     <main class="grid">
