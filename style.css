@@ -415,10 +415,10 @@ html, body {
         grid-template-columns: repeat(20, 1.4rem);
         grid-template-rows: repeat(3, 4rem);
     }
-    .letter, .enter, .delete {
+    .letter {
         font-size: 1.2rem;
     }
-    .enter {
+    .enter, .delete {
         font-size: .9rem;
     }
 }
