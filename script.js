@@ -2,7 +2,8 @@
 
 // Arrays
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',];
-const words = ['cat', 'dog', 'ant', 'art', 'ham', 'hat'];
+// const words = ['cat', 'dog', 'ant', 'art', 'ham', 'hat'];
+const words = ['ace', 'act', 'add', 'age', 'aid', 'aim', 'air', 'ale', 'all', 'and', 'ant', 'any', 'ape', 'app', 'apt', 'arc', 'are', 'arm', 'art', 'ash', 'act', 'ate', 'awe', 'axe', 'bad', 'bag', 'ban', 'bar', 'bat', 'bed', 'bee', 'beg', 'bet', 'bid', 'big', 'bin', 'bug', 'bye', 'cap', 'car', 'cat', 'cod', 'cog', 'dig', 'dim', 'dog', 'dry', 'egg', 'ego', 'far', 'fin', 'ham', 'hut', 'lie', 'low', 'mad', 'map', 'man', 'now', 'oak', 'odd', 'pad', 'pay', 'pen', 'pet', 'pin', 'red', 'rye', 'sad', 'sit', 'shy', 'tin', 'wax'];
 
 // Generate Random Word
 const randomNumber = Math.floor(Math.random() * words.length);
@@ -11,7 +12,7 @@ let randomWordArray = randomWord.split('');
 console.log(randomWord);
 
 
-/* ----- GAMEPLAY ----- */
+/* ----- 🕹 GAMEPLAY 🕹 ----- */
 // User Guess
 let userGuess = [];
 
@@ -19,7 +20,13 @@ let userGuess = [];
 let turn = 1;
 let currentLetter = 0;
 
-// DOM
+// Game Status
+let isGameWon = false;
+
+// Points
+let points = 0;
+
+// DOM Elements (tiles)
 const top1 = document.querySelector('.top-1');
 const top2 = document.querySelector('.top-2');
 const top3 = document.querySelector('.top-3');
@@ -31,19 +38,22 @@ const bot2 = document.querySelector('.bot-2');
 const bot3 = document.querySelector('.bot-3');
 
 
-/* ----- FUNCTIONALITY ----- */
+/* ----- 🔠 TYPING FUNCTIONALITY 🔠 ----- */
 const keys = document.querySelectorAll('.key');
 
+// Keyboard
 keys.forEach((key) => {
     key.addEventListener('click', (e) => {
         checkKey(e.target.textContent);
     });
 });
 
+// Onscreen Keyboard
 document.addEventListener('keydown', (e) => {
     checkKey(e.key);
 });
 
+// Check Key
 function checkKey(key) {
     if (alphabet.includes(key)) {
         addLetter(key);
@@ -56,10 +66,10 @@ function checkKey(key) {
     }
 }
 
+// Add Letter to Onscreen Display (Tiles):
 function addLetter(letter) {
     if (userGuess.length < 3) {
         userGuess.push(letter);
-        console.log(userGuess);
         // Modify DOM:
         if (turn === 1) {
             top1.textContent = userGuess[0];
@@ -79,10 +89,10 @@ function addLetter(letter) {
     }
 }
 
+// Delete Previous Letter:
 function deleteLetter() {
     if (userGuess.length > 0) {
         userGuess.pop();
-        console.log(userGuess);
         // Modify DOM:
         if (turn === 1) {
             top1.textContent = userGuess[0];
@@ -102,12 +112,10 @@ function deleteLetter() {
     }
 }
 
+// Submit Guess:
 function submitGuess() {
     if (userGuess.length === 3) {
-        console.log(userGuess.join(''));
-        // Modify DOM --
-        checkGuess();
-        // -------------
+        checkGuess(); /* (to modify DOM) */
         userGuess = [];
         turn++;
     } else {
@@ -116,12 +124,12 @@ function submitGuess() {
 }
 
 function checkGuess() {
-    console.log(userGuess);
-    console.log(randomWordArray);
-    if (userGuess.join('') === randomWord) {
-        gameWon();
-    }
+    changeColours();
+    checkWin();
+}
 
+// Update Tile Colours:
+function changeColours() {
     if (turn === 1) {
         if (userGuess[0] === randomWordArray[0]) {
             top1.classList.add('correct');
@@ -197,6 +205,70 @@ function checkGuess() {
     }
 }
 
-function gameWon() {
-    console.log(`That's right! The correct word was '${randomWord}'.`)
+// Check whether the user has won or not
+function checkWin() {
+    if (userGuess.join('') === randomWord) {
+        if (turn === 1) {
+            points += 100;
+        } else if (turn === 2) {
+            points += 75;
+        } else if (turn === 3) {
+            points += 50;
+        }
+        setInterval(winModalIn, 1000);
+    } else if (userGuess.join('') !== randomWordArray) {
+        if (turn === 3) {
+            setInterval(loseModalIn, 1000);
+        } else {
+            return;
+        }
+    }
+}
+
+function chooseRandomWord() {
+    const randomNumber = Math.floor(Math.random() * words.length);
+    randomWord = words[randomNumber];
+    randomWordArray = randomWord.split('');
+}
+
+
+
+
+// ---------- IN-GAME ANIMATIONS ----------
+const modalBackground = document.querySelector('.background');
+const modalContainer = document.querySelector('.modal-container');
+const modal = document.querySelector('.modal');
+const modalBody = document.querySelector('.modal-content');
+const loseModalBody = document.querySelector('.lose-modal-content');
+
+function winModalIn() {
+    modalBackground.classList.add('modal-background-shown');
+    modalContainer.style.display = 'flex';
+    modal.classList.add('modal-in-animation');
+    setInterval(() => {
+        modalBody.classList.add('text-fade-animation');
+    }, 500);
+}
+
+function loseModalIn() {
+    modalBackground.classList.add('modal-background-shown');
+    modalContainer.style.display = 'flex';
+    modal.classList.add('modal-in-animation');
+    setInterval(() => {
+        loseModalBody.classList.add('text-fade-animation');
+    }, 500);
+}
+
+
+// PLAY AGAIN
+const playAgainBtn = document.querySelectorAll('#playAgainBtn');
+
+playAgainBtn.forEach(btn => {
+    btn.addEventListener('click', function () {
+        playAgain();
+    })
+});
+
+function playAgain() {
+    location.reload();
 }
