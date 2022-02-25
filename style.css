@@ -206,6 +206,7 @@ html, body {
     background-color: black;
     opacity: .7;
     display: none;
+    z-index: 100;
 }
 
 .modal-background-shown {
@@ -222,6 +223,7 @@ html, body {
     display: none;
     justify-content: center;
     align-items: center;
+    z-index: 150;
 }
 
 .modal {
