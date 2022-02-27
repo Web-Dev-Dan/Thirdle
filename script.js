@@ -2,7 +2,9 @@
 
 // Arrays
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',];
+// const words = ['cat', 'dog', 'ant', 'art', 'ham', 'hat'];
 const words = ['ace', 'act', 'add', 'age', 'aid', 'aim', 'air', 'ale', 'all', 'and', 'ant', 'any', 'ape', 'app', 'apt', 'arc', 'are', 'arm', 'art', 'ash', 'act', 'ate', 'awe', 'axe', 'bad', 'bag', 'ban', 'bar', 'bat', 'bed', 'bee', 'beg', 'bet', 'bid', 'big', 'bin', 'bug', 'bye', 'cap', 'car', 'cat', 'cod', 'cog', 'dig', 'dim', 'dog', 'dry', 'egg', 'ego', 'far', 'fin', 'ham', 'hut', 'lie', 'low', 'mad', 'map', 'man', 'now', 'oak', 'odd', 'pad', 'pay', 'pen', 'pet', 'pin', 'red', 'rye', 'sad', 'sit', 'shy', 'tin', 'wax'];
+
 
 // Generate Random Word
 const randomNumber = Math.floor(Math.random() * words.length);
@@ -113,7 +115,7 @@ function deleteLetter() {
 // Submit Guess:
 function submitGuess() {
     if (userGuess.length === 3) {
-        checkGuess(); /* (to modify DOM) */
+        checkGuess();
         userGuess = [];
         turn++;
     } else {
@@ -204,6 +206,10 @@ function changeColours() {
 }
 
 // Check whether the user has won or not
+const winModal_correctAnswerText = document.getElementById('winAnswer');
+const loseModal_correctAnswerText = document.getElementById('loseAnswer');
+
+
 function checkWin() {
     if (userGuess.join('') === randomWord) {
         if (turn === 1) {
@@ -213,10 +219,12 @@ function checkWin() {
         } else if (turn === 3) {
             points += 50;
         }
-        setInterval(winModalIn, 1000);
+        setTimeout(winModalIn, 1000);
+        winModal_correctAnswerText.textContent = randomWord;
     } else if (userGuess.join('') !== randomWordArray) {
         if (turn === 3) {
-            setInterval(loseModalIn, 1000);
+            setTimeout(loseModalIn, 1000);
+            loseModal_correctAnswerText.textContent = randomWord;
         } else {
             return;
         }
@@ -231,7 +239,6 @@ function chooseRandomWord() {
 
 
 
-
 // ---------- IN-GAME ANIMATIONS ----------
 const modalBackground = document.querySelector('.background');
 const modalContainer = document.querySelector('.modal-container');
@@ -243,16 +250,19 @@ function winModalIn() {
     modalBackground.classList.add('modal-background-shown');
     modalContainer.style.display = 'flex';
     modal.classList.add('modal-in-animation');
-    setInterval(() => {
+    setTimeout(() => {
         modalBody.classList.add('text-fade-animation');
     }, 500);
+    correctAnswerText.forEach((answer) => {
+        answer.textContent = randomWord;
+    });
 }
 
 function loseModalIn() {
     modalBackground.classList.add('modal-background-shown');
     modalContainer.style.display = 'flex';
     modal.classList.add('modal-in-animation');
-    setInterval(() => {
+    setTimeout(() => {
         loseModalBody.classList.add('text-fade-animation');
     }, 500);
 }
