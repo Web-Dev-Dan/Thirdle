@@ -229,6 +229,16 @@ function checkWin() {
             return;
         }
     }
+    
+    // Display Turn Number
+    const turnNumberText = document.getElementById('turnNumber');
+    if (turn === 1) {
+        turnNumberText.textContent = 'first';
+    } else if (turn === 2) {
+        turnNumberText.textContent = 'second';
+    } else if (turn === 3) {
+        turnNumberText.textContent = 'third';
+    }
 }
 
 function chooseRandomWord() {
