@@ -253,9 +253,6 @@ function winModalIn() {
     setTimeout(() => {
         modalBody.classList.add('text-fade-animation');
     }, 500);
-    correctAnswerText.forEach((answer) => {
-        answer.textContent = randomWord;
-    });
 }
 
 function loseModalIn() {
