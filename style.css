@@ -336,7 +336,6 @@ html, body {
     background-color: var(--color-correct);
     padding: .5rem 1rem;
     color: white;
-    text-transform: capitalize;
     font-weight: 900;
     opacity: .8;
     border-radius: .4rem;
