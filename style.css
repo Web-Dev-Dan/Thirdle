@@ -50,7 +50,6 @@ html, body {
 
 /* Stats */
 .stats-small {
-    /* background-color: red; */
     width: 100%;
     height: 5rem;
     margin-top: 1.5rem;
@@ -96,7 +95,6 @@ html, body {
 .stats-btn__stats {
     background-color: var(--color-wrong-location);
     color: white;
-
 }
 
 .stats-btn__rules {
@@ -196,8 +194,6 @@ html, body {
 .enter, .delete {
     grid-column: span 3;
 }
-
-
 
 
 .background {
