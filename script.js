@@ -288,6 +288,9 @@ function playAgain() {
 // Hint
 let hintUsed = false;
 const hintBtn = document.querySelector('.stats-btn__hint');
+const hintBackground = document.querySelector('.hint-background');
+const hintContainer = document.querySelector('.hint-container');
+const hintModal = document.querySelector('.hint-modal');
 
 hintBtn.addEventListener('click', getHint);
 
@@ -297,5 +300,12 @@ function getHint() {
     } else {
         hintBtn.classList.add('btn-disabled');
         hintUsed = true;
+        openHintModal();
     }
+}
+
+function openHintModal() {
+    hintBackground.style.display = 'flex';
+    hintContainer.style.display = 'flex';
+    hintModal.style.display = 'flex';
 }
