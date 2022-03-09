@@ -337,6 +337,41 @@ html, body {
     border-radius: .4rem;
 }
 
+
+
+/* Hint Modal */
+.hint-background {
+    background-color: black;
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+
+.hint-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.hint-modal {
+    background-color: var(--color-correct);
+    width: 20rem;
+    height: 20rem;
+    border-radius: 50%;
+    display: none;
+}
+
+
 @keyframes zoomIn {
     0% {
         width: 0%;
