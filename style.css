@@ -368,6 +368,12 @@ html, body {
     width: 20rem;
     height: 20rem;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8rem;
+    font-weight: 900;
+    color: white;
     display: none;
 }
 
