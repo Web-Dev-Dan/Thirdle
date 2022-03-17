@@ -349,6 +349,7 @@ html, body {
     width: 100vw;
     height: 100vh;
     display: none;
+    z-index: 100;
 }
 
 .hint-container {
@@ -361,10 +362,11 @@ html, body {
     justify-content: center;
     align-items: center;
     display: none;
+    z-index: 100;
 }
 
 .hint-modal {
-    background-color: var(--color-correct);
+    background-color: var(--color-wrong-location);
     width: 20rem;
     height: 20rem;
     border-radius: 50%;
@@ -375,6 +377,44 @@ html, body {
     font-weight: 900;
     color: white;
     display: none;
+}
+
+.hint-modal-text {
+    opacity: 0;
+}
+
+.hint-modal-in {
+    animation-name: hintModalIn;
+    animation-duration: 2s;
+}
+
+.hint-text-fade {
+    animation-name: hintTextFade;
+    animation-delay: 1s;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+
+
+@keyframes hintModalIn {
+    0% {
+        width: 0rem;
+        height: 0rem;
+    }
+    100% {
+        width: 20rem;
+        height: 20rem;
+    }
+}
+
+@keyframes hintTextFade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 
