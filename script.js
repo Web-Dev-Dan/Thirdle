@@ -14,6 +14,7 @@ let randomWordArray = randomWord.split('');
 /* ----- 🕹 GAMEPLAY 🕹 ----- */
 // User Guess
 let userGuess = [];
+let correctLetterArray = [];
 
 // Turn Number
 let turn = 1;
@@ -23,7 +24,7 @@ let currentLetter = 0;
 let isGameWon = false;
 
 // Points
-let points = 0;
+let points = 100;
 
 // DOM Elements (tiles)
 const top1 = document.querySelector('.top-1');
@@ -69,6 +70,7 @@ function checkKey(key) {
 function addLetter(letter) {
     if (userGuess.length < 3) {
         userGuess.push(letter);
+        console.log(userGuess);
         // Modify DOM:
         if (turn === 1) {
             top1.textContent = userGuess[0];
@@ -92,6 +94,7 @@ function addLetter(letter) {
 function deleteLetter() {
     if (userGuess.length > 0) {
         userGuess.pop();
+        console.log(userGuess);
         // Modify DOM:
         if (turn === 1) {
             top1.textContent = userGuess[0];
@@ -114,7 +117,8 @@ function deleteLetter() {
 // Submit Guess:
 function submitGuess() {
     if (userGuess.length === 3) {
-        checkGuess();
+        console.log(userGuess.join(''));
+        checkGuess(); /* (to modify DOM) */
         userGuess = [];
         turn++;
     } else {
@@ -123,6 +127,8 @@ function submitGuess() {
 }
 
 function checkGuess() {
+    // console.log(userGuess);
+    // console.log(randomWordArray);
     changeColours();
     checkWin();
 }
@@ -132,6 +138,7 @@ function changeColours() {
     if (turn === 1) {
         if (userGuess[0] === randomWordArray[0]) {
             top1.classList.add('correct');
+            correctLetterArray.push(userGuess[0]);
         } else if (userGuess[0] !== randomWordArray[0] && randomWordArray.includes(userGuess[0])) {
             top1.classList.add('wrong-location');
         } else if (userGuess[0] !== randomWordArray[0]) {
@@ -140,6 +147,7 @@ function changeColours() {
 
         if (userGuess[1] === randomWordArray[1]) {
             top2.classList.add('correct');
+            correctLetterArray.push(userGuess[1]);
         } else if (userGuess[1] !== randomWordArray[1] && randomWordArray.includes(userGuess[1])) {
             top2.classList.add('wrong-location');
         } else if (userGuess[1] !== randomWordArray[1]) {
@@ -148,6 +156,7 @@ function changeColours() {
 
         if (userGuess[2] === randomWordArray[2]) {
             top3.classList.add('correct');
+            correctLetterArray.push(userGuess[2]);
         } else if (userGuess[2] !== randomWordArray[2] && randomWordArray.includes(userGuess[2])) {
             top3.classList.add('wrong-location');
         } else if (userGuess[2] !== randomWordArray[2]) {
@@ -156,6 +165,7 @@ function changeColours() {
     } else if (turn === 2) {
         if (userGuess[0] === randomWordArray[0]) {
             mid1.classList.add('correct');
+            correctLetterArray.push(userGuess[0]);
         } else if (userGuess[0] !== randomWordArray[0] && randomWordArray.includes(userGuess[0])) {
             mid1.classList.add('wrong-location');
         } else if (userGuess[0] !== randomWordArray[0]) {
@@ -164,6 +174,7 @@ function changeColours() {
 
         if (userGuess[1] === randomWordArray[1]) {
             mid2.classList.add('correct');
+            correctLetterArray.push(userGuess[1]);
         } else if (userGuess[1] !== randomWordArray[1] && randomWordArray.includes(userGuess[1])) {
             mid2.classList.add('wrong-location');
         } else if (userGuess[1] !== randomWordArray[1]) {
@@ -172,6 +183,7 @@ function changeColours() {
 
         if (userGuess[2] === randomWordArray[2]) {
             mid3.classList.add('correct');
+            correctLetterArray.push(userGuess[2]);
         } else if (userGuess[2] !== randomWordArray[2] && randomWordArray.includes(userGuess[2])) {
             mid3.classList.add('wrong-location');
         } else if (userGuess[2] !== randomWordArray[2]) {
@@ -180,6 +192,7 @@ function changeColours() {
     } else if (turn === 3) {
         if (userGuess[0] === randomWordArray[0]) {
             bot1.classList.add('correct');
+            correctLetterArray.push(userGuess[0]);
         } else if (userGuess[0] !== randomWordArray[0] && randomWordArray.includes(userGuess[0])) {
             bot1.classList.add('wrong-location');
         } else if (userGuess[0] !== randomWordArray[0]) {
@@ -188,6 +201,7 @@ function changeColours() {
 
         if (userGuess[1] === randomWordArray[1]) {
             bot2.classList.add('correct');
+            correctLetterArray.push(userGuess[1]);
         } else if (userGuess[1] !== randomWordArray[1] && randomWordArray.includes(userGuess[1])) {
             bot2.classList.add('wrong-location');
         } else if (userGuess[1] !== randomWordArray[1]) {
@@ -196,6 +210,7 @@ function changeColours() {
 
         if (userGuess[2] === randomWordArray[2]) {
             bot3.classList.add('correct');
+            correctLetterArray.push(userGuess[2]);
         } else if (userGuess[2] !== randomWordArray[2] && randomWordArray.includes(userGuess[2])) {
             bot3.classList.add('wrong-location');
         } else if (userGuess[2] !== randomWordArray[2]) {
@@ -204,25 +219,119 @@ function changeColours() {
     }
 }
 
+
+// Hint
+let hintUsed = false;
+const hintBtn = document.querySelector('.stats-btn__hint');
+const hintBackground = document.querySelector('.hint-background');
+const hintContainer = document.querySelector('.hint-container');
+const hintModal = document.querySelector('.hint-modal');
+const hintModalText = document.querySelector('.hint-modal-text');
+const closeHintModalBtn = document.querySelector('.hint-modal-btn');
+const hintLetterCircle = document.querySelector('.hint-letter');
+
+hintBtn.addEventListener('click', getHint);
+
+function getHint() {
+    if (hintBtn.classList.contains('btn-disabled')) {
+        return;
+    } else {
+        hintBtn.classList.add('btn-disabled');
+        hintUsed = true;
+        openHintModal();
+    }
+}
+
+function openHintModal() {
+    console.log('Hint modal opened!');
+    hintBackground.style.display = 'flex';
+    hintContainer.style.display = 'flex';
+    hintModal.style.display = 'flex';
+    closeHintModalBtn.classList.add('hint-modal-btn-in');
+
+    function chooseHintLetter() {
+        let hintLetter = randomWordArray[Math.floor(Math.random() * randomWordArray.length)];
+        hintModalText.textContent = hintLetter.toUpperCase();
+        console.log(hintLetter);
+        console.log(correctLetterArray);
+    }
+
+    chooseHintLetter();
+}
+
+closeHintModalBtn.addEventListener('click', function () {
+    hintLetterCircle.style.display = 'flex';
+    hintLetterCircle.style.zIndex = '50';
+    hintLetterCircle.textContent = hintModalText.textContent;
+    hintBackground.style.display = 'none';
+    hintContainer.style.display = 'none';
+    hintModal.style.display = 'none';
+});
+
+
+// Stats
+const statsBtn = document.querySelectorAll('.stats-btn__stats');
+statsBtn.forEach(btn => {
+    btn.addEventListener('click', openStatsModal);
+});
+
+function openStatsModal() {
+    console.log('Stats modal opened');
+}
+
+// Rules
+const rulesBtn = document.querySelector('.stats-btn__rules');
+
+rulesBtn.addEventListener('click', openRulesModal);
+
+function openRulesModal() {
+    console.log('Rules modal opened');
+}
+
+
 // Check whether the user has won or not
 const winModal_correctAnswerText = document.getElementById('winAnswer');
 const loseModal_correctAnswerText = document.getElementById('loseAnswer');
+const winModal_pointsText = document.getElementById('gamePointsWin');
+const loseModal_pointsText = document.getElementById('gamePointsLose');
+const winModal_hintText = document.getElementById('usedHintWin');
+const loseModal_hintText = document.getElementById('usedHintLose');
+
 
 function checkWin() {
     if (userGuess.join('') === randomWord) {
+        console.log('CONGRATS!');
         if (turn === 1) {
-            points += 100;
+            points -= 0;
         } else if (turn === 2) {
-            points += 75;
+            points -= 25;
         } else if (turn === 3) {
-            points += 50;
+            points -= 50;
         }
         setTimeout(winModalIn, 1000);
+        if (hintUsed === true) {
+            winModal_hintText.textContent = "used";
+            points -= 25;
+        } else {
+            winModal_hintText.textContent = "didn't use";
+        }
         winModal_correctAnswerText.textContent = randomWord;
+        winModal_pointsText.textContent = points;
+        console.log('Points:' + points);
     } else if (userGuess.join('') !== randomWordArray) {
         if (turn === 3) {
+            console.log('GAME OVER! The answer was ' + randomWord);
             setTimeout(loseModalIn, 1000);
+            if (hintUsed === true) {
+                loseModal_hintText.textContent = "used";
+                points -= 100;
+            } else {
+                loseModal_hintText.textContent = "didn't use";
+                points -= 75;
+            }
             loseModal_correctAnswerText.textContent = randomWord;
+            loseModal_pointsText.textContent = points;
+            console.log('Points:' + points);
         } else {
             return;
         }
@@ -243,6 +352,7 @@ function chooseRandomWord() {
     const randomNumber = Math.floor(Math.random() * words.length);
     randomWord = words[randomNumber];
     randomWordArray = randomWord.split('');
+    console.log(randomWord);
 }
 
 
@@ -253,6 +363,7 @@ const modal = document.querySelector('.modal');
 const modalBody = document.querySelector('.modal-content');
 const loseModalBody = document.querySelector('.lose-modal-content');
 
+
 function winModalIn() {
     modalBackground.classList.add('modal-background-shown');
     modalContainer.style.display = 'flex';
@@ -260,6 +371,9 @@ function winModalIn() {
     setTimeout(() => {
         modalBody.classList.add('text-fade-animation');
     }, 500);
+    // winModal_correctAnswerText.forEach((answer) => {
+    //     answer.textContent = randomWord;
+    // });
 }
 
 function loseModalIn() {
@@ -270,6 +384,8 @@ function loseModalIn() {
         loseModalBody.classList.add('text-fade-animation');
     }, 500);
 }
+
+
 
 // PLAY AGAIN
 const playAgainBtn = document.querySelectorAll('#playAgainBtn');
@@ -282,30 +398,4 @@ playAgainBtn.forEach(btn => {
 
 function playAgain() {
     location.reload();
-}
-
-
-// Hint
-let hintUsed = false;
-const hintBtn = document.querySelector('.stats-btn__hint');
-const hintBackground = document.querySelector('.hint-background');
-const hintContainer = document.querySelector('.hint-container');
-const hintModal = document.querySelector('.hint-modal');
-
-hintBtn.addEventListener('click', getHint);
-
-function getHint() {
-    if (hintBtn.classList.contains('btn-disabled')) {
-        return;
-    } else {
-        hintBtn.classList.add('btn-disabled');
-        hintUsed = true;
-        openHintModal();
-    }
-}
-
-function openHintModal() {
-    hintBackground.style.display = 'flex';
-    hintContainer.style.display = 'flex';
-    hintModal.style.display = 'flex';
 }
