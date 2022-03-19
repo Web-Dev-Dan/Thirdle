@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <!-- Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon -->
@@ -13,19 +12,22 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Styling -->
     <link rel="stylesheet" href="style.css">
-    <!-- Scripting -->
     <script src="script.js" defer></script>
-    <!-- Title -->
     <title>Thirdle | Word Game</title>
 </head>
 
 <body>
+    <!-- Rules Modal -->
+    <!-- Include 'Rules' heading, 'Gameplay' section and 'Points' section -->
+
     <!-- Hint Modal -->
     <div class="hint-background"></div>
     <div class="hint-container">
-        <div class="hint-modal">A</div>
+        <div class="hint-modal hint-modal-in">
+            <p class="hint-modal-text hint-text-fade">B</p>
+            <button class="btn hint-modal-btn">Got it!</button>
+        </div>
     </div>
-    
     <!-- Modal -->
     <div class="background"></div>
     <div class="modal-container">
@@ -41,14 +43,15 @@
                     </p>
                     <p class="msg-secondary">You guessed correct on your <strong><span id="turnNumber">second</span>
                             turn</strong>. You
-                        <span id="usedHint">didn't use</span> your hint and received <strong><span
-                                id="gamePoints">100</span>
+                        <span id="usedHintWin">didn't use</span> your hint and received <strong><span
+                                id="gamePointsWin">100</span>
                             points</strong>.</p>
                 </div>
                 <div class="modal-buttons">
                     <button id="playAgainBtn" class="btn btn-primary"><i class="fa-solid fa-arrow-rotate-right"></i>
                         Play Again</button>
-                    <button class="btn btn-secondary"><i class="fa-solid fa-chart-line"></i> View Stats</button>
+                    <button class="btn btn-secondary stats-btn__stats"><i class="fa-solid fa-chart-line"></i> View
+                        Stats</button>
                 </div>
             </div>
 
@@ -62,13 +65,14 @@
                     <p class="msg-primary">You lost! The correct word was <span id="loseAnswer"
                             class="emphasis">dog</span>.
                     </p>
-                    <p class="msg-secondary">You <span id="usedHint">didn't use</span> your hint and received
-                        <strong><span id="gamePoints">100</span> points</strong>.</p>
+                    <p class="msg-secondary">You <span id="usedHintLose">didn't use</span> your hint and received
+                        <strong><span id="gamePointsLose">100</span> points</strong>.</p>
                 </div>
                 <div class="modal-buttons">
                     <button id="playAgainBtn" class="btn btn-primary"><i class="fa-solid fa-arrow-rotate-right"></i>
                         Play Again</button>
-                    <button class="btn btn-secondary"><i class="fa-solid fa-chart-line"></i> View Stats</button>
+                    <button class="btn btn-secondary stats-btn__stats"><i class="fa-solid fa-chart-line"></i> View
+                        Stats</button>
                 </div>
             </div>
         </div>
@@ -86,6 +90,7 @@
     </div>
 
     <div class="stats-small">
+        <div class="hint-letter">A</div>
         <button class="stats-btn stats-btn__hint"><i class="fa-solid fa-magnifying-glass"></i>
             Hint</button>
         <button class="stats-btn stats-btn__stats"><i class="fa-solid fa-chart-line"></i> Stats</button>
