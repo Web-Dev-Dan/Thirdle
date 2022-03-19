@@ -50,6 +50,7 @@ html, body {
 
 /* Stats */
 .stats-small {
+    /* background-color: red; */
     width: 100%;
     height: 5rem;
     margin-top: 1.5rem;
@@ -57,6 +58,8 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    /* display: none; */
 }
 
 .stats-btn {
@@ -95,6 +98,7 @@ html, body {
 .stats-btn__stats {
     background-color: var(--color-wrong-location);
     color: white;
+
 }
 
 .stats-btn__rules {
@@ -111,6 +115,26 @@ html, body {
     filter: brightness(100%);
     transform: translateY(0);
 }
+
+.hint-letter {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 5rem;
+    height: 5rem;
+    background-color: var(--color-wrong-location);
+    border-radius: 50%;
+    transform: translateX(4.5rem) translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color: white;
+    display: none;
+}
+
+/* Clue, Overall Points (% Modal for detailed stats), Rules (modal)*/
 
 
 /* Grid */
@@ -194,6 +218,8 @@ html, body {
 .enter, .delete {
     grid-column: span 3;
 }
+
+
 
 
 .background {
@@ -332,11 +358,11 @@ html, body {
     background-color: var(--color-correct);
     padding: .5rem 1rem;
     color: white;
+    /* text-transform: capitalize; */
     font-weight: 900;
     opacity: .8;
     border-radius: .4rem;
 }
-
 
 
 /* Hint Modal */
@@ -395,7 +421,46 @@ html, body {
     animation-fill-mode: forwards;
 }
 
+.hint-modal-btn {
+    position: absolute;
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: lightgray;
+    width: 25%;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    border: none;
+    transition: all .1s;
+    user-select: none;
+    opacity: 0;
+}
 
+.hint-modal-btn:hover {
+    cursor: pointer;
+    filter: brightness(90%);
+}
+
+.hint-modal-btn-in {
+    animation-name: hintModalBtnIn;
+    animation-duration: 1s;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes hintModalBtnIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 
 @keyframes hintModalIn {
     0% {
@@ -416,7 +481,6 @@ html, body {
         opacity: 1;
     }
 }
-
 
 @keyframes zoomIn {
     0% {
@@ -468,6 +532,12 @@ html, body {
     .header-letter {
         font-size: 3.5rem;
     }
+    .hint-letter {
+        width: 4.5rem;
+        height: 4.5rem;
+        transform: translateX(4rem) translateY(-50%);
+        font-size: 1.6rem;
+    }
     .grid {
         grid-template-rows: repeat(3, 10rem);
         grid-template-columns: repeat(3, 10rem);
@@ -503,6 +573,12 @@ html, body {
     }
     .header-letter {
         font-size: 2rem;
+    }
+    .hint-letter {
+        width: 4rem;
+        height: 4rem;
+        transform: translateX(1.5rem) translateY(-50%);
+        font-size: 1.6rem;
     }
     .stats {
         height: 3rem;
