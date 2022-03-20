@@ -263,12 +263,31 @@ closeHintModalBtn.addEventListener('click', function () {
 
 // Stats
 const statsBtn = document.querySelectorAll('.stats-btn__stats');
+const closeStatsBtn = document.querySelector('.stats-modal-close-btn');
+const statsModalBackground = document.querySelector('.stats-modal-background');
+const statsModal = document.querySelector('.stats-modal');
+
 statsBtn.forEach(btn => {
     btn.addEventListener('click', openStatsModal);
 });
 
+closeStatsBtn.addEventListener('click', closeStatsModal);
+statsModalBackground.addEventListener('click', closeStatsModal);
+
 function openStatsModal() {
-    console.log('Stats modal opened');
+    statsModalBackground.style.display = 'flex';
+    statsModal.style.display = 'flex';
+    updateDate();
+    updateStats();
+}
+
+function closeStatsModal() {
+    statsModalBackground.style.display = 'none';
+    statsModal.style.display = 'none';
+}
+
+function updateStats() {
+    console.log('Stats updated');
 }
 
 
@@ -286,12 +305,23 @@ rulesModalBackground.addEventListener('click', closeRulesModal);
 function openRulesModal() {
     rulesModalBackground.style.display = 'flex';
     rulesModal.style.display = 'flex';
+    updateDate();
 }
 
 function closeRulesModal() {
     rulesModalBackground.style.display = 'none';
     rulesModal.style.display = 'none';
 }
+
+function updateDate() {
+    const currentDate = document.querySelectorAll('#currentDate');
+
+    currentDate.forEach(year => {
+        const currentYear = new Date().getFullYear();
+        year.textContent = currentYear;
+    });
+}
+
 
 
 // Check whether the user has won or not
@@ -362,7 +392,6 @@ const modalContainer = document.querySelector('.modal-container');
 const modal = document.querySelector('.modal');
 const modalBody = document.querySelector('.modal-content');
 const loseModalBody = document.querySelector('.lose-modal-content');
-
 
 function winModalIn() {
     modalBackground.classList.add('modal-background-shown');
