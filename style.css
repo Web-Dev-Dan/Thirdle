@@ -19,6 +19,7 @@ html, body {
     align-items: center;
     min-height: 100vh;
     max-height: 100vh;
+    overflow: scroll;
 }
 
 /* Header */
