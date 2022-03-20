@@ -70,7 +70,6 @@ function checkKey(key) {
 function addLetter(letter) {
     if (userGuess.length < 3) {
         userGuess.push(letter);
-        console.log(userGuess);
         // Modify DOM:
         if (turn === 1) {
             top1.textContent = userGuess[0];
@@ -94,7 +93,6 @@ function addLetter(letter) {
 function deleteLetter() {
     if (userGuess.length > 0) {
         userGuess.pop();
-        console.log(userGuess);
         // Modify DOM:
         if (turn === 1) {
             top1.textContent = userGuess[0];
@@ -117,7 +115,6 @@ function deleteLetter() {
 // Submit Guess:
 function submitGuess() {
     if (userGuess.length === 3) {
-        console.log(userGuess.join(''));
         checkGuess(); /* (to modify DOM) */
         userGuess = [];
         turn++;
@@ -127,8 +124,6 @@ function submitGuess() {
 }
 
 function checkGuess() {
-    // console.log(userGuess);
-    // console.log(randomWordArray);
     changeColours();
     checkWin();
 }
@@ -243,7 +238,6 @@ function getHint() {
 }
 
 function openHintModal() {
-    console.log('Hint modal opened!');
     hintBackground.style.display = 'flex';
     hintContainer.style.display = 'flex';
     hintModal.style.display = 'flex';
@@ -252,8 +246,6 @@ function openHintModal() {
     function chooseHintLetter() {
         let hintLetter = randomWordArray[Math.floor(Math.random() * randomWordArray.length)];
         hintModalText.textContent = hintLetter.toUpperCase();
-        console.log(hintLetter);
-        console.log(correctLetterArray);
     }
 
     chooseHintLetter();
@@ -279,13 +271,26 @@ function openStatsModal() {
     console.log('Stats modal opened');
 }
 
+
+
 // Rules
 const rulesBtn = document.querySelector('.stats-btn__rules');
+const closeRulesBtn = document.querySelector('.rules-modal-close-btn');
+const rulesModalBackground = document.querySelector('.rules-modal-background');
+const rulesModal = document.querySelector('.rules-modal');
 
 rulesBtn.addEventListener('click', openRulesModal);
+closeRulesBtn.addEventListener('click', closeRulesModal);
+rulesModalBackground.addEventListener('click', closeRulesModal);
 
 function openRulesModal() {
-    console.log('Rules modal opened');
+    rulesModalBackground.style.display = 'flex';
+    rulesModal.style.display = 'flex';
+}
+
+function closeRulesModal() {
+    rulesModalBackground.style.display = 'none';
+    rulesModal.style.display = 'none';
 }
 
 
@@ -300,7 +305,6 @@ const loseModal_hintText = document.getElementById('usedHintLose');
 
 function checkWin() {
     if (userGuess.join('') === randomWord) {
-        console.log('CONGRATS!');
         if (turn === 1) {
             points -= 0;
         } else if (turn === 2) {
@@ -317,10 +321,8 @@ function checkWin() {
         }
         winModal_correctAnswerText.textContent = randomWord;
         winModal_pointsText.textContent = points;
-        console.log('Points:' + points);
     } else if (userGuess.join('') !== randomWordArray) {
         if (turn === 3) {
-            console.log('GAME OVER! The answer was ' + randomWord);
             setTimeout(loseModalIn, 1000);
             if (hintUsed === true) {
                 loseModal_hintText.textContent = "used";
@@ -331,7 +333,6 @@ function checkWin() {
             }
             loseModal_correctAnswerText.textContent = randomWord;
             loseModal_pointsText.textContent = points;
-            console.log('Points:' + points);
         } else {
             return;
         }
@@ -352,7 +353,6 @@ function chooseRandomWord() {
     const randomNumber = Math.floor(Math.random() * words.length);
     randomWord = words[randomNumber];
     randomWordArray = randomWord.split('');
-    console.log(randomWord);
 }
 
 
@@ -371,9 +371,6 @@ function winModalIn() {
     setTimeout(() => {
         modalBody.classList.add('text-fade-animation');
     }, 500);
-    // winModal_correctAnswerText.forEach((answer) => {
-    //     answer.textContent = randomWord;
-    // });
 }
 
 function loseModalIn() {
@@ -384,7 +381,6 @@ function loseModalIn() {
         loseModalBody.classList.add('text-fade-animation');
     }, 500);
 }
-
 
 
 // PLAY AGAIN
