@@ -18,7 +18,61 @@
 
 <body>
     <!-- Rules Modal -->
-    <!-- Include 'Rules' heading, 'Gameplay' section and 'Points' section -->
+    <div class="rules-modal-background"></div>
+    <div class="rules-modal">
+        <div class="rules-modal-close-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="header">
+            <div class="header-letter">R</div>
+            <div class="header-letter">U</div>
+            <div class="header-letter">L</div>
+            <div class="header-letter">E</div>
+            <div class="header-letter">S</div>
+        </div>
+        <!-- Objectives -->
+        <i class="fa-solid fa-bullseye"></i>
+        <h3>Objective</h3>
+        <p>The objective of Thirdle is to guess the correct 3-letter word in three turns or less.</p>
+        <hr>
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <!-- Gameplay -->
+        <h3>Gameplay</h3>
+        <p>To play Thirdle, use your keyboard or the onscreen keyboard to type a 3-letter word. Submit your guess by
+            clicking <span class="button-text button-text-gray">Enter</span>.</p>
+        <p class="break-p">The letters will then change to one of three colours:</p>
+        <p class="break-p"><span class="button-text button-text-blue">Blue</span> indicates that this letter is in the
+            <strong>correct place</strong>.</p>
+        <p class="break-p"><span class="button-text button-text-orange">Orange</span> indicates that the answer includes
+            this letter, but you have entered it in the <strong>wrong place</strong>.</p>
+        <p class="break-p"><span class="button-text button-text-black">Black</span> indicates that the answer does not
+            include
+            this letter.</p>
+        <p class="break-p">You can get a hint at any point in the game by clicking on the <span
+                class="button-text button-text-blue"><i class="fa-solid fa-magnifying-glass"></i> hint</span> button.
+        </p>
+        <hr>
+        <!-- Points -->
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Points</h3>
+        <p>At the end of each game, you will be awarded points:</p>
+        <p class="break-p">You will be awarded <strong>100</strong> points if you guess correctly on your first turn.
+        </p>
+        <p class="break-p">You will be awarded <strong>75</strong> points if you guess correctly on your second turn.
+        </p>
+        <p class="break-p">You will be awarded <strong>50</strong> points if you guess correctly on your third turn.</p>
+        <p class="break-p">You will be awarded <strong>25</strong> points if you fail to guess the correct word.</p>
+        <p class="break-p">There will be a <strong>-25</strong> point penalty if you use the <span
+                class="button-text button-text-blue"><i class="fa-solid fa-magnifying-glass"></i> hint</span> button.
+        </p>
+        <p class="break-p">You can view your points and other statistics at any point by clicking on the <span
+                class="button-text button-text-orange"><i class="fa-solid fa-chart-line"></i> Stats</span> button.
+        </p>
+        <hr>
+        <footer class="footer">
+            <p>Copyright &copy; Daniel Healy, 2022.</p>
+        </footer>
+    </div>
 
     <!-- Hint Modal -->
     <div class="hint-background"></div>
