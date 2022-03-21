@@ -4,12 +4,10 @@
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',];
 const words = ['ace', 'act', 'add', 'age', 'aid', 'aim', 'air', 'ale', 'all', 'and', 'ant', 'any', 'ape', 'app', 'apt', 'arc', 'are', 'arm', 'art', 'ash', 'act', 'ate', 'awe', 'axe', 'bad', 'bag', 'ban', 'bar', 'bat', 'bed', 'bee', 'beg', 'bet', 'bid', 'big', 'bin', 'bug', 'bye', 'cap', 'car', 'cat', 'cod', 'cog', 'dig', 'dim', 'dog', 'dry', 'egg', 'ego', 'far', 'fin', 'ham', 'hut', 'lie', 'low', 'mad', 'map', 'man', 'now', 'oak', 'odd', 'pad', 'pay', 'pen', 'pet', 'pin', 'red', 'rye', 'sad', 'sit', 'shy', 'tin', 'wax'];
 
-
 // Generate Random Word
 const randomNumber = Math.floor(Math.random() * words.length);
 let randomWord = words[randomNumber];
 let randomWordArray = randomWord.split('');
-
 
 /* ----- 🕹 GAMEPLAY 🕹 ----- */
 // User Guess
@@ -25,6 +23,15 @@ let isGameWon = false;
 
 // Points
 let points = 100;
+
+// Stats
+let totalPoints = 0;
+let gamesPlayed = 0;
+let gamesWon = 0;
+let gamesLost = 0;
+let hintsUsed = 0;
+let winPercentage = 0;
+let losePercentage = 0;
 
 // DOM Elements (tiles)
 const top1 = document.querySelector('.top-1');
@@ -115,7 +122,7 @@ function deleteLetter() {
 // Submit Guess:
 function submitGuess() {
     if (userGuess.length === 3) {
-        checkGuess(); /* (to modify DOM) */
+        checkGuess();
         userGuess = [];
         turn++;
     } else {
@@ -258,8 +265,8 @@ closeHintModalBtn.addEventListener('click', function () {
     hintBackground.style.display = 'none';
     hintContainer.style.display = 'none';
     hintModal.style.display = 'none';
+    hintsUsed += 1;
 });
-
 
 // Stats
 const statsBtn = document.querySelectorAll('.stats-btn__stats');
@@ -285,11 +292,6 @@ function closeStatsModal() {
     statsModalBackground.style.display = 'none';
     statsModal.style.display = 'none';
 }
-
-function updateStats() {
-    console.log('Stats updated');
-}
-
 
 
 // Rules
@@ -323,7 +325,6 @@ function updateDate() {
 }
 
 
-
 // Check whether the user has won or not
 const winModal_correctAnswerText = document.getElementById('winAnswer');
 const loseModal_correctAnswerText = document.getElementById('loseAnswer');
@@ -331,7 +332,6 @@ const winModal_pointsText = document.getElementById('gamePointsWin');
 const loseModal_pointsText = document.getElementById('gamePointsLose');
 const winModal_hintText = document.getElementById('usedHintWin');
 const loseModal_hintText = document.getElementById('usedHintLose');
-
 
 function checkWin() {
     if (userGuess.join('') === randomWord) {
@@ -400,6 +400,9 @@ function winModalIn() {
     setTimeout(() => {
         modalBody.classList.add('text-fade-animation');
     }, 500);
+    totalPoints += points;
+    gamesPlayed += 1;
+    gamesWon += 1;
 }
 
 function loseModalIn() {
@@ -409,6 +412,38 @@ function loseModalIn() {
     setTimeout(() => {
         loseModalBody.classList.add('text-fade-animation');
     }, 500);
+    totalPoints += points;
+    gamesPlayed += 1;
+    gamesLost += 1;
+}
+
+
+// ---------- 🧠 POINTS AND STATS 🧠 ----------
+const totalPointsText = document.getElementById('totalPointsText');
+const winPercentageText = document.getElementById('winPercentageText');
+const losePercentageText = document.getElementById('losePercentageText');
+const statsBarCorrectColour = document.querySelector('.stats-bar__correct-colour');
+
+const gamesPlayedText = document.getElementById('gamesPlayedText');
+const gamesWonText = document.getElementById('gamesWonText');
+const gamesLostText = document.getElementById('gamesLostText');
+const hintsUsedText = document.getElementById('hintsUsedText');
+
+function updateStats() {
+    totalPointsText.textContent = totalPoints;
+    gamesPlayedText.textContent = gamesPlayed;
+    gamesWonText.textContent = gamesWon;
+    gamesLostText.textContent = gamesLost;
+    hintsUsedText.textContent = hintsUsed;
+
+    if (gamesPlayed === 0) {
+        return;
+    } else {
+        winPercentage = Math.round((gamesWon * 100) / gamesPlayed);
+        winPercentageText.textContent = winPercentage;
+        losePercentageText.textContent = 100 - winPercentage;
+        statsBarCorrectColour.style.width = `${winPercentage}%`;
+    }
 }
 
 
@@ -422,5 +457,73 @@ playAgainBtn.forEach(btn => {
 });
 
 function playAgain() {
-    location.reload();
+    // Choose New Word
+    randomWord = words[Math.floor(Math.random() * words.length)];
+    randomWordArray = randomWord.split('');
+
+    // Gameplay Reset
+    userGuess = [];
+    correctLetterArray = [];
+    turn = 1;
+    currentLetter = 0;
+    isGameWon = false;
+    points = 100;
+
+    // Hint Reset
+    hintUsed = false;
+    hintLetterCircle.style.display = 'none';
+    hintLetterCircle.style.zIndex = '0';
+    hintBtn.classList.remove('btn-disabled');
+    closeHintModalBtn.classList.remove('hint-modal-btn-in');
+
+    modalBackground.classList.remove('modal-background-shown');
+    modalContainer.style.display = 'none';
+    modal.classList.remove('modal-in-animation');
+    modalBody.classList.remove('text-fade-animation');
+    loseModalBody.classList.remove('text-fade-animation');
+
+    top1.textContent = '';
+    top1.classList.remove('correct');
+    top1.classList.remove('wrong-location');
+    top1.classList.remove('wrong');
+
+    top2.textContent = '';
+    top2.classList.remove('correct');
+    top2.classList.remove('wrong-location');
+    top2.classList.remove('wrong');
+
+    top3.textContent = '';
+    top3.classList.remove('correct');
+    top3.classList.remove('wrong-location');
+    top3.classList.remove('wrong');
+
+    mid1.textContent = '';
+    mid1.classList.remove('correct');
+    mid1.classList.remove('wrong-location');
+    mid1.classList.remove('wrong');
+
+    mid2.textContent = '';
+    mid2.classList.remove('correct');
+    mid2.classList.remove('wrong-location');
+    mid2.classList.remove('wrong');
+
+    mid3.textContent = '';
+    mid3.classList.remove('correct');
+    mid3.classList.remove('wrong-location');
+    mid3.classList.remove('wrong');
+
+    bot1.textContent = '';
+    bot1.classList.remove('correct');
+    bot1.classList.remove('wrong-location');
+    bot1.classList.remove('wrong');
+
+    bot2.textContent = '';
+    bot2.classList.remove('correct');
+    bot2.classList.remove('wrong-location');
+    bot2.classList.remove('wrong');
+
+    bot3.textContent = '';
+    bot3.classList.remove('correct');
+    bot3.classList.remove('wrong-location');
+    bot3.classList.remove('wrong');
 }
