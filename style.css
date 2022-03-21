@@ -52,7 +52,6 @@ html, body {
 
 /* Stats */
 .stats-small {
-    /* background-color: red; */
     width: 100%;
     height: 5rem;
     margin-top: 1.5rem;
@@ -61,7 +60,6 @@ html, body {
     justify-content: center;
     align-items: center;
     position: relative;
-    /* display: none; */
 }
 
 .stats-btn {
@@ -136,8 +134,6 @@ html, body {
     display: none;
 }
 
-/* Clue, Overall Points (% Modal for detailed stats), Rules (modal)*/
-
 
 /* Grid */
 .grid {
@@ -187,7 +183,6 @@ html, body {
     grid-template-columns: repeat(20, 2.5rem);
     grid-template-rows: repeat(3, 5rem);
     grid-gap: .5rem;
-    touch-action: manipulation;
 }
 
 .letter, .enter, .delete {
@@ -221,8 +216,6 @@ html, body {
 .enter, .delete {
     grid-column: span 3;
 }
-
-
 
 
 .background {
@@ -361,7 +354,6 @@ html, body {
     background-color: var(--color-correct);
     padding: .5rem 1rem;
     color: white;
-    /* text-transform: capitalize; */
     font-weight: 900;
     opacity: .8;
     border-radius: .4rem;
@@ -517,7 +509,6 @@ html, body {
 .rules-modal p, .stats-modal p {
     font-size: 1.6rem;
     font-weight: 100;
-    /* max-width: 30rem; */
     margin: 0 auto;
     line-height: 1.5;
 }
@@ -575,9 +566,11 @@ html, body {
 .rules-modal-close-btn i, .stats-modal-close-btn i {
     color: black;
 }
+
 hr {
     margin-top: 3rem;
 }
+
 .footer {
     width: 100%;
     height: 10rem;
@@ -587,12 +580,10 @@ hr {
 
 /* Stats Modal */
 .stats-modal-background {
-    /* display: flex; */
     z-index: 200;
 }
 
 .stats-modal {
-    /* display: flex; */
     z-index: 200;
 }
 
@@ -651,9 +642,9 @@ hr {
 }
 
 .stats-bar {
+    background-color: var(--color-wrong-location);
     width: 100%;
     height: 5rem;
-    background-color: var(--color-wrong-location);
     border-radius: 2.5rem;
     overflow: hidden;
 }
@@ -665,6 +656,7 @@ hr {
 }
 
 
+/* ANIMATIONS */
 @keyframes hintModalBtnIn {
     0% {
         opacity: 0;
@@ -727,7 +719,7 @@ hr {
 }
 
 
-
+/* MEDIA QUERIES */
 @media only screen and (max-width: 700px) {
     .keyboard {
         grid-template-columns: repeat(20, 2.5rem);
