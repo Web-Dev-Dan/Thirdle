@@ -187,6 +187,7 @@ html, body {
     grid-template-columns: repeat(20, 2.5rem);
     grid-template-rows: repeat(3, 5rem);
     grid-gap: .5rem;
+    touch-action: manipulation;
 }
 
 .letter, .enter, .delete {
