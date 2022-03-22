@@ -491,6 +491,7 @@ function resetStats() {
     statsBarCorrectColour.style.width = '0%';
 
     updateStats();
+    playAgain();
 }
 
 
