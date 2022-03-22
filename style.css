@@ -49,7 +49,6 @@ html, body {
     background-color: var(--color-correct);
 }
 
-
 /* Stats */
 .stats-small {
     width: 100%;
@@ -134,7 +133,6 @@ html, body {
     display: none;
 }
 
-
 /* Grid */
 .grid {
     padding: 2rem;
@@ -218,7 +216,7 @@ html, body {
     grid-column: span 3;
 }
 
-
+/* MODALS */
 .background {
     position: absolute;
     top: 0;
@@ -359,7 +357,6 @@ html, body {
     opacity: .8;
     border-radius: .4rem;
 }
-
 
 /* Hint Modal */
 .hint-background {
@@ -539,14 +536,17 @@ html, body {
     background-color: lightgray;
     color: black;
 }
+
 .button-text-blue {
     background-color: var(--color-correct);
     color: white;
 }
+
 .button-text-orange {
     background-color: var(--color-wrong-location);
     color: white;
 }
+
 .button-text-black {
     background-color: var(--color-wrong);
     color: white;
@@ -577,7 +577,6 @@ hr {
     height: 10rem;
     margin-top: 4rem;
 }
-
 
 /* Stats Modal */
 .stats-modal-background {
@@ -643,9 +642,9 @@ hr {
 }
 
 .stats-bar {
-    background-color: var(--color-wrong-location);
     width: 100%;
     height: 5rem;
+    background-color: var(--color-wrong-location);
     border-radius: 2.5rem;
     overflow: hidden;
 }
@@ -656,8 +655,125 @@ hr {
     width: 0%;
 }
 
+/* Reset Stats */
+.reset-btn-container {
+    width: 100%;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-/* ANIMATIONS */
+.reset-btn {
+    background-color: rgb(237, 59, 59);
+    color: white;
+    width: 100%;
+    max-width: 20rem;
+    height: 6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    border: none;
+    transition: all .1s;
+    user-select: none;
+}
+
+.reset-btn:hover {
+    cursor: pointer;
+    filter: brightness(90%);
+    transform: translateY(-.2rem);
+}
+
+.reset-modal-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: .8;
+    z-index: 300;
+    display: none;
+}
+
+.reset-modal-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.reset-modal {
+    background-color: white;
+    border-radius: .5rem;
+    width: 70%;
+    max-width: 50rem;
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-modal p {
+    text-align: center;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    font-weight: 100;
+}
+
+.reset-modal-buttons {
+    width: 100%;
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.reset-btns {
+    width: 40%;
+    max-width: 20rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    border: none;
+    transition: all .1s;
+    user-select: none;
+}
+
+.close-reset-btn-small {
+    background-color: lightgray;
+    color: rgb(92, 92, 92);
+}
+
+.reset-btn-small {
+    background-color: rgb(237, 59, 59);
+    color: white;
+}
+
+.reset-btns:hover {
+    cursor: pointer;
+    filter: brightness(90%);
+    transform: translateY(-.2rem);
+}
+
+/* KEYFRAME ANIMATIONS */
 @keyframes hintModalBtnIn {
     0% {
         opacity: 0;
@@ -718,7 +834,6 @@ hr {
         transform: scale(100%);
     }
 }
-
 
 /* MEDIA QUERIES */
 @media only screen and (max-width: 700px) {
