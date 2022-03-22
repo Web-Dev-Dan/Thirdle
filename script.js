@@ -77,6 +77,7 @@ function checkKey(key) {
 function addLetter(letter) {
     if (userGuess.length < 3) {
         userGuess.push(letter);
+       
         // Modify DOM:
         if (turn === 1) {
             top1.textContent = userGuess[0];
@@ -100,6 +101,7 @@ function addLetter(letter) {
 function deleteLetter() {
     if (userGuess.length > 0) {
         userGuess.pop();
+
         // Modify DOM:
         if (turn === 1) {
             top1.textContent = userGuess[0];
@@ -383,6 +385,7 @@ function chooseRandomWord() {
     const randomNumber = Math.floor(Math.random() * words.length);
     randomWord = words[randomNumber];
     randomWordArray = randomWord.split('');
+    console.log(randomWord);
 }
 
 
@@ -444,6 +447,50 @@ function updateStats() {
         losePercentageText.textContent = 100 - winPercentage;
         statsBarCorrectColour.style.width = `${winPercentage}%`;
     }
+}
+
+
+// RESET STATS
+const openResetStatsBtn = document.querySelector('.reset-btn');
+const resetModalBackground = document.querySelector('.reset-modal-background');
+const resetModalContainer = document.querySelector('.reset-modal-container');
+const cancelResetStatsBtn = document.getElementById('closeResetModalBtn');
+const resetStatsBtn = document.getElementById('resetStatsBtn');
+
+openResetStatsBtn.addEventListener('click', openResetStats);
+cancelResetStatsBtn.addEventListener('click', closeResetStats);
+resetStatsBtn.addEventListener('click', resetStats);
+
+function openResetStats() {
+    resetModalBackground.style.display = 'flex';
+    resetModalContainer.style.display = 'flex';
+}
+
+function closeResetStats() {
+    resetModalBackground.style.display = 'none';
+    resetModalContainer.style.display = 'none';
+}
+
+function resetStats() {
+    resetModalBackground.style.display = 'none';
+    resetModalContainer.style.display = 'none';
+
+    points = 100;
+    turn = 1;
+
+    totalPoints = 0;
+    gamesPlayed = 0;
+    gamesWon = 0;
+    gamesLost = 0;
+    hintsUsed = 0;
+    winPercentage = 0;
+    losePercentage = 0;
+
+    winPercentageText.textContent = 0;
+    losePercentageText.textContent = 0;
+    statsBarCorrectColour.style.width = '0%';
+
+    updateStats();
 }
 
 
