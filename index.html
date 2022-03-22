@@ -17,8 +17,19 @@
 </head>
 
 <body>
+    <!-- Reset Modal -->
+    <div class="reset-modal-background"></div>
+    <div class="reset-modal-container">
+        <div class="reset-modal">
+            <p>Are you sure you want to reset your current statistics?</p>
+            <div class="reset-modal-buttons">
+                <button class="reset-btns close-reset-btn-small" id="closeResetModalBtn">Cancel</button>
+                <button class="reset-btns reset-btn-small" id="resetStatsBtn">Reset</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Stats Modal -->
-    <!-- Adds stats to local storage. Add a 'Clear Stats' button to delete the local storage -->
     <div class="stats-modal-background"></div>
     <div class="stats-modal">
         <div class="stats-modal-close-btn">
@@ -66,6 +77,10 @@
         <p class="stat" id="hintsUsedText">0</p>
         <h3>Hints Used</h3>
 
+        <div class="reset-btn-container">
+            <div class="reset-btn">Reset Stats</div>
+        </div>
+
         <footer class="footer">
             <p>Copyright &copy; Daniel Healy, <span id="currentDate">2022</span>.</p>
         </footer>
@@ -84,12 +99,14 @@
             <div class="header-letter">E</div>
             <div class="header-letter">S</div>
         </div>
+        
         <!-- Objectives -->
         <i class="fa-solid fa-bullseye"></i>
         <h3>Objective</h3>
         <p>The objective of Thirdle is to guess the correct 3-letter word in three turns or less.</p>
         <hr>
         <i class="fa-solid fa-wand-magic-sparkles"></i>
+        
         <!-- Gameplay -->
         <h3>Gameplay</h3>
         <p>To play Thirdle, use your keyboard or the onscreen keyboard to type a 3-letter word. Submit your guess by
@@ -109,7 +126,9 @@
                 class="button-text button-text-blue"><i class="fa-solid fa-magnifying-glass"></i> hint</span>
             button.
         </p>
+        
         <hr>
+        
         <!-- Points -->
         <i class="fa-solid fa-chart-line"></i>
         <h3>Points</h3>
@@ -130,7 +149,9 @@
         <p class="break-p">You can view your points and other statistics at any point by clicking on the <span
                 class="button-text button-text-orange"><i class="fa-solid fa-chart-line"></i> Stats</span> button.
         </p>
+        
         <hr>
+        
         <footer class="footer">
             <p>Copyright &copy; Daniel Healy, <span id="currentDate">2022</span>.</p>
         </footer>
@@ -144,6 +165,7 @@
             <button class="btn hint-modal-btn">Got it!</button>
         </div>
     </div>
+    
     <!-- Modal -->
     <div class="background"></div>
     <div class="modal-container">
@@ -170,7 +192,6 @@
                         Stats</button>
                 </div>
             </div>
-
 
             <div class="lose-modal-content">
                 <div class="modal-icons">
