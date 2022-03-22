@@ -719,7 +719,7 @@ hr {
     border-radius: .5rem;
     width: 70%;
     max-width: 50rem;
-    padding: 5rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -731,6 +731,7 @@ hr {
     font-size: 1.6rem;
     line-height: 1.5;
     font-weight: 100;
+    max-width: 20rem;
 }
 
 .reset-modal-buttons {
